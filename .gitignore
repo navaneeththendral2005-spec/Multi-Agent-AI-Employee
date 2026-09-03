@@ -6,3 +6,8 @@ __pycache__/
 !.env.example
 .vscode/
 *.log
+credentials/
+tokens/
+
+# Generated user projects
+workspace/*

@@ -1,12 +1,15 @@
 from agents.base_agent import BaseAgent
 
 
-class DeveloperAgent(BaseAgent):
+class ContentAgent(BaseAgent):
     """
-    Developer Agent for CHORUS.
+    Content Agent for CHORUS.
 
-    Responsible for software development planning,
-    implementation strategy, and technical design.
+    Responsible for:
+    - Creating written content
+    - Rewriting and editing
+    - Summarization
+    - Matching requested tone and format
     """
 
     def __init__(
@@ -14,12 +17,12 @@ class DeveloperAgent(BaseAgent):
         provider: str = "gemini"
     ):
         super().__init__(
-            "developer",
+            "content",
             provider
         )
 
     # =========================================================
-    # DEVELOPMENT PLANNING
+    # CONTENT GENERATION
     # =========================================================
 
     def run(
@@ -27,66 +30,36 @@ class DeveloperAgent(BaseAgent):
         task: str
     ) -> str:
         """
-        Create a practical technical implementation plan
-        for the assigned software-development task.
+        Execute the assigned content task.
         """
 
         prompt = f"""
-You are CHORUS's Developer Agent.
+You are CHORUS's Content Agent.
 
-Complete ONLY the software-development task below.
+Complete ONLY the content task below.
 
 ASSIGNED TASK:
 {task}
 
-RESPONSIBILITY:
-
-Create a practical technical implementation plan.
-
 RULES:
 
-1. Focus only on the assigned task.
-2. Do not perform another agent's responsibility.
-3. Do not write the actual application code.
-4. Keep the plan practical and concise.
-5. Avoid unnecessary explanations.
-6. Choose technologies appropriate for the task.
-7. Clearly identify implementation dependencies.
-8. Do not invent requirements that were not requested.
+1. Focus only on the assigned content task.
+2. Follow the requested tone, length, format,
+   and audience.
+3. Use provided research or source information
+   accurately.
+4. Do not invent facts or unsupported information.
+5. Do not perform coding, data analysis,
+   or unrelated tasks.
+6. Do not perform additional research unless
+   explicitly requested.
+7. Avoid unnecessary explanations.
+8. Keep the output clear and well structured.
+9. Return ONLY the requested content unless
+   additional information is explicitly requested.
 
-RETURN:
-
-TECHNOLOGY STACK
-• Language:
-• Backend:
-• Frontend:
-• Database:
-• Testing:
-
-PROJECT STRUCTURE
-<concise folder structure>
-
-IMPLEMENTATION TASKS
-1. <task>
-2. <task>
-3. <task>
-4. <task>
-5. <task>
-
-API REQUIREMENTS
-• <requirement>
-• <requirement>
-
-DEPENDENCIES
-• <dependency>
-• <dependency>
-
-IMPLEMENTATION ORDER
-1. <step>
-2. <step>
-3. <step>
-4. <step>
-5. <step>
+If source or research information is provided,
+treat it as the factual basis for the response.
 """
 
         # -----------------------------------------------------

@@ -1,55 +1,68 @@
-from models.llm_factory import get_llm
+from agents.base_agent import BaseAgent
 
 
-class BackendAgent:
+class BackendAgent(BaseAgent):
     """
-    Backend Agent for the Multi-Agent AI Employee.
+    Backend Agent for CHORUS.
 
-    The Backend Agent is responsible for analyzing the
-    technical plan and creating a backend implementation plan.
+    Responsible for backend architecture, APIs,
+    databases, and server-side implementation planning.
     """
 
-    def __init__(self, provider: str = "gemini"):
-        self.provider = provider
-        self.llm = get_llm(provider)
+    def __init__(
+        self,
+        provider: str = "gemini"
+    ):
+        super().__init__(
+            "backend",
+            provider
+        )
 
-    def run(self, developer_plan: str) -> str:
+    # =========================================================
+    # BACKEND PLANNING
+    # =========================================================
+
+    def run(
+        self,
+        task: str
+    ) -> str:
         """
-        Convert the Developer Agent's technical plan
-        into a backend-specific implementation plan.
+        Create a practical backend implementation plan
+        for the assigned task.
         """
 
         prompt = f"""
-You are the Backend Agent in a professional
-multi-agent software development team.
+You are CHORUS's Backend Agent.
 
-The Developer Agent has created the following
-technical implementation plan:
+Complete ONLY the backend-development task below.
 
-{developer_plan}
+ASSIGNED TASK:
+{task}
 
-Your responsibility is to focus ONLY on the
-backend development of this software.
+RESPONSIBILITY:
 
-IMPORTANT OUTPUT RULES:
+Design the backend architecture and implementation
+strategy required for the assigned task.
 
-- Do NOT write the complete application code yet.
-- Do NOT discuss frontend development.
-- Do NOT discuss UI/UX design.
-- Do NOT add unnecessary explanations.
-- Do NOT use Markdown headings such as ###.
-- Do NOT use horizontal lines such as ---.
-- Keep the response below 400 words.
-- Use short bullet points.
-- Keep the output practical and easy to read.
+RULES:
 
-Use EXACTLY this structure:
+1. Focus only on backend development.
+2. Do not perform frontend, research, content,
+   data-analysis, or unrelated tasks.
+3. Do not write complete application code yet.
+4. Keep the response practical and concise.
+5. Choose technologies appropriate for the task.
+6. Do not invent requirements.
+7. Clearly identify APIs, data requirements,
+   dependencies, and implementation order.
+
+RETURN:
 
 BACKEND TECHNOLOGY
-• Language: <language>
-• Framework: <framework>
-• Database: <database>
-• API Style: <REST/GraphQL/etc.>
+• Language:
+• Framework:
+• Database:
+• API Style:
 
 BACKEND ARCHITECTURE
 • <component>
@@ -58,15 +71,14 @@ BACKEND ARCHITECTURE
 • <component>
 
 DATABASE DESIGN
-• <table/model>
-• <table/model>
-• <table/model>
+• <table / collection>
+• <field / relationship>
+• <field / relationship>
 
 API ENDPOINTS
-• <HTTP method> <endpoint> — <purpose>
-• <HTTP method> <endpoint> — <purpose>
-• <HTTP method> <endpoint> — <purpose>
-• <HTTP method> <endpoint> — <purpose>
+• <method> <endpoint> — <purpose>
+• <method> <endpoint> — <purpose>
+• <method> <endpoint> — <purpose>
 
 BACKEND TASKS
 1. <task>
@@ -78,38 +90,51 @@ BACKEND TASKS
 DEPENDENCIES
 • <dependency>
 • <dependency>
-• <dependency>
 
 IMPLEMENTATION ORDER
 1. <step>
 2. <step>
 3. <step>
 4. <step>
-
-Focus only on backend responsibilities.
-
-DEVELOPER PLAN:
-{developer_plan}
 """
 
-        # Send request to the selected LLM
-        response = self.llm.invoke(prompt)
+        # -----------------------------------------------------
+        # CENTRALIZED LLM HANDLER
+        # -----------------------------------------------------
 
-        # Extract response content
+        response = self.invoke(
+            prompt
+        )
+
+        # -----------------------------------------------------
+        # NORMALIZE RESPONSE
+        # -----------------------------------------------------
+
         content = response.content
 
-        # Gemini may return content as a list
         if isinstance(content, list):
+
             text_parts = []
 
             for item in content:
-                if isinstance(item, dict) and "text" in item:
-                    text_parts.append(item["text"])
+
+                if (
+                    isinstance(item, dict)
+                    and item.get("text")
+                ):
+                    text_parts.append(
+                        item["text"]
+                    )
 
                 elif isinstance(item, str):
-                    text_parts.append(item)
+                    text_parts.append(
+                        item
+                    )
 
-            return "\n".join(text_parts).strip()
+            return "\n".join(
+                text_parts
+            ).strip()
 
-        # Normal string response
-        return str(content).strip()
+        return str(
+            content
+        ).strip()
