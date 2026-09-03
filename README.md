@@ -64,48 +64,46 @@ The system is designed around the idea of an AI employee that can understand a r
 
 ## Project Structure
 
-Multi-Agent-AI-Employee/
-│
-├── agents/
-│   ├── manager_agent.py
-│   ├── orchestrator.py
-│   ├── research_agent.py
-│   ├── data_analyst_agent.py
-│   ├── document_agent.py
-│   ├── developer_agent.py
-│   ├── backend_agent.py
-│   ├── code_generator_agent.py
-│   ├── code_fixer_agent.py
-│   ├── debugger_agent.py
-│   ├── code_reviewer_agent.py
-│   ├── communication_agent.py
-│   ├── content_agent.py
-│   └── tester_agent.py
-│
-├── api/
-│   └── server.py
-│
-├── communication_auth/
-│   └── gmail_auth.py
-│
-├── document_tools/
-│   └── creator.py
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── data/
-│   │   ├── hooks/
-│   │   ├── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   ├── public/
-│   ├── package.json
-│   └── vite.config.js
-│
-├── workspace/
-├── main.py
-├── requirements.txt
-├── .env.example
-├── .gitignore
-└── README.md
+CHORUS follows a modular architecture consisting of a React/Vite frontend, FastAPI backend, specialized AI agents, communication tools, and document generation utilities.
+
+### Frontend
+
+- React + Vite
+- `frontend/src/components/`
+- `frontend/src/hooks/`
+- `frontend/src/data/`
+
+### Backend
+
+- `api/server.py`
+- `main.py`
+- `agents/`
+
+### AI Agents
+
+- Manager / Orchestrator
+- Research Agent
+- Data Analyst Agent
+- Document Agent
+- Developer Agent
+- Code Fixer Agent
+- Debugger Agent
+- Code Reviewer Agent
+- Communication Agent
+- Content Agent
+- Tester Agent
+
+### Tools & Integrations
+
+- `document_tools/`
+- `communication_auth/`
+- Gmail API
+- Tavily Search
+- Pandas
+- Document generation libraries
+
+### Configuration
+
+- `.env.example`
+- `.gitignore`
+- `requirements.txt`
