@@ -26,6 +26,54 @@ The system is designed around the idea of an AI employee that can understand a r
 
 ---
 
+## Project Structure
+
+CHORUS follows a modular architecture consisting of a React/Vite frontend, FastAPI backend, specialized AI agents, communication tools, and document generation utilities.
+
+### Frontend
+
+- React + Vite
+- frontend/src/components/
+- frontend/src/hooks/
+- frontend/src/data/
+
+### Backend
+
+- api/server.py
+- main.py
+- agents/
+
+### AI Agents
+
+- Manager / Orchestrator
+- Research Agent
+- Data Analyst Agent
+- Document Agent
+- Developer Agent
+- Code Fixer Agent
+- Debugger Agent
+- Code Reviewer Agent
+- Communication Agent
+- Content Agent
+- Tester Agent
+
+### Tools & Integrations
+
+- document_tools/
+- communication_auth/
+- Gmail API
+- Tavily Search
+- Pandas
+- Document generation libraries
+
+### Configuration
+
+- .env.example
+- .gitignore
+- requirements.txt
+
+---
+
 ## Architecture
 
 ```text
@@ -61,49 +109,3 @@ The system is designed around the idea of an AI employee that can understand a r
                     ▼              ▼              ▼
               Developer       Code Fixer    Communication
                 Agent           Agent           Agent
-
-## Project Structure
-
-CHORUS follows a modular architecture consisting of a React/Vite frontend, FastAPI backend, specialized AI agents, communication tools, and document generation utilities.
-
-### Frontend
-
-- React + Vite
-- `frontend/src/components/`
-- `frontend/src/hooks/`
-- `frontend/src/data/`
-
-### Backend
-
-- `api/server.py`
-- `main.py`
-- `agents/`
-
-### AI Agents
-
-- Manager / Orchestrator
-- Research Agent
-- Data Analyst Agent
-- Document Agent
-- Developer Agent
-- Code Fixer Agent
-- Debugger Agent
-- Code Reviewer Agent
-- Communication Agent
-- Content Agent
-- Tester Agent
-
-### Tools & Integrations
-
-- `document_tools/`
-- `communication_auth/`
-- Gmail API
-- Tavily Search
-- Pandas
-- Document generation libraries
-
-### Configuration
-
-- `.env.example`
-- `.gitignore`
-- `requirements.txt`
