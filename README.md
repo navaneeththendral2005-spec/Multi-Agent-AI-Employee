@@ -74,6 +74,24 @@ CHORUS follows a modular architecture consisting of a React/Vite frontend, FastA
 
 ---
 
+## IMPORTANT
+
+CHORUS requires two terminals to run locally. Start the FastAPI backend in one terminal and the React/Vite frontend in another. Before starting the backend, configure your own API keys and required credentials in a `.env` file using `.env.example` as a reference.
+
+Terminal 1 — Backend
+
+uvicorn api.server:app --reload --host 127.0.0.1 --port 8000
+
+Terminal 2 — Frontend
+
+cd frontend
+
+npm install
+
+npm run dev
+
+---
+
 ## Architecture
 
 ```text
