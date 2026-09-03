@@ -1,11 +1,111 @@
-# Multi-Agent AI Employee
+# CHORUS — Multi-Agent AI Employee
 
-Multi-Agent AI Employee is an AI-powered agentic system designed to automate software development tasks through a team of specialized AI agents. The system uses a Manager Agent to coordinate tasks between Developer, Backend, and Code Generator agents, enabling automated code generation, project creation, file management, and workflow execution. Built with Python and Gemini LLM integration, the project focuses on creating a flexible foundation for an AI employee capable of understanding requirements, planning tasks, generating code, and managing development workflows.
+CHORUS is an AI-powered multi-agent employee system designed to understand user requests, coordinate specialized AI agents, and execute tasks across software development, research, data analysis, document generation, and communication.
 
-## Project Goal
+Instead of relying on a single AI model for every task, CHORUS uses specialized agents coordinated through a central Manager and Orchestrator.
 
-An AI-powered multi-agent system that plans, generates, and manages software development tasks through specialized autonomous agents.
+---
 
-## Status
+## Overview
 
-🚧 Working Prototype — actively under development.
+CHORUS can handle a wide range of tasks through specialized agents, including:
+
+- Software development
+- Web research
+- Data analysis
+- Document generation
+- Presentation generation
+- Spreadsheet generation
+- File processing
+- Email communication
+- Code generation and debugging
+- Code review and testing
+- Multi-step task orchestration
+
+The system is designed around the idea of an AI employee that can understand a request, determine the appropriate agent or workflow, execute the task, and return the result through a unified interface.
+
+---
+
+## Architecture
+
+```text
+                         ┌──────────────────────┐
+                         │        User          │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │   CHORUS Frontend    │
+                         │     React + Vite     │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │    FastAPI Backend   │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                    ┌──────────────────────────────┐
+                    │   Manager / Orchestrator     │
+                    └──────────────┬───────────────┘
+                                   │
+          ┌────────────────────────┼────────────────────────┐
+          │                        │                        │
+          ▼                        ▼                        ▼
+   Research Agent          Data Analyst Agent       Document Agent
+          │                        │                        │
+          └────────────────────────┼────────────────────────┘
+                                   │
+                    ┌──────────────┼──────────────┐
+                    │              │              │
+                    ▼              ▼              ▼
+              Developer       Code Fixer    Communication
+                Agent           Agent           Agent
+
+## Project Structure
+
+Multi-Agent-AI-Employee/
+│
+├── agents/
+│   ├── manager_agent.py
+│   ├── orchestrator.py
+│   ├── research_agent.py
+│   ├── data_analyst_agent.py
+│   ├── document_agent.py
+│   ├── developer_agent.py
+│   ├── backend_agent.py
+│   ├── code_generator_agent.py
+│   ├── code_fixer_agent.py
+│   ├── debugger_agent.py
+│   ├── code_reviewer_agent.py
+│   ├── communication_agent.py
+│   ├── content_agent.py
+│   └── tester_agent.py
+│
+├── api/
+│   └── server.py
+│
+├── communication_auth/
+│   └── gmail_auth.py
+│
+├── document_tools/
+│   └── creator.py
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── data/
+│   │   ├── hooks/
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
+│
+├── workspace/
+├── main.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
+└── README.md
